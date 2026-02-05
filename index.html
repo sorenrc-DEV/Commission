@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Commission Calculator</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #f0f4f8;
+        text-align: center;
+        padding: 40px;
+    }
+    .report {
+        background: white;
+        padding: 30px;
+        max-width: 500px;
+        margin: auto;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+</style>
+</head>
+<body>
+
+<script>
+let name = prompt("Enter salesperson name:");
+let subtotal = 0;
+let input;
+
+do {
+    input = prompt("Enter sale amount or type Done:");
+
+    if (input !== null && input.toLowerCase() !== "done") {
+        let sale = parseFloat(input);
+        if (!isNaN(sale)) {
+            subtotal += sale;
+        }
+    }
+
+} while (input !== null && input.toLowerCase() !== "done");
+
+let rate = 0;
+
+if (subtotal <= 0) {
+    rate = 0;
+} else if (subtotal < 500) {
+    rate = 0.05;
+} else if (subtotal < 1000) {
+    rate = 0.10;
+} else {
+    rate = 0.15;
+}
+
+let commission = subtotal * rate;
+let total = subtotal + commission;
+
+let subtotalStr = subtotal.toFixed(2);
+let rateStr = (rate * 100).toFixed(2);
+let commissionStr = commission.toFixed(2);
+let totalStr = total.toFixed(2);
+
+document.write(`
+<div class="report">
+<h2>Hello ${name}, Here is your Weekly Commission Report.</h2>
+<p>Your sales total is $${subtotalStr}, so your commission rate is ${rateStr}%</p>
+<p>Your total commission is $${commissionStr}.</p>
+<p>Your total earnings are $${totalStr}</p>
+</div>
+`);
+</script>
+
+</body>
+</html>
